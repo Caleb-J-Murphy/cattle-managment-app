@@ -8,3 +8,8 @@
     font-size: rem(50px);
   }
 }
+
+.normal {
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+  padding-top: rem(64px);
+}
