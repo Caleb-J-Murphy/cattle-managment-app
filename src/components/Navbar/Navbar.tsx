@@ -1,13 +1,14 @@
 import { IconFingerprint, IconGauge, IconHome2, IconPig, IconPlus } from '@tabler/icons-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Center, Stack, Tooltip, UnstyledButton } from '@mantine/core';
+import { routes } from '@/routing/constants';
 import classes from './Navbar.module.css';
 
 const navItems = [
-  { icon: IconHome2, label: 'Home', path: '/' },
-  { icon: IconGauge, label: 'Dashboard', path: '/dashboard' },
-  { icon: IconPlus, label: 'Add Animal', path: '/createAnimal' },
-  { icon: IconPig, label: 'View Animals', path: '/animalList' },
+  { icon: IconHome2, label: 'Home', path: routes.home },
+  { icon: IconGauge, label: 'Dashboard', path: routes.dashboard },
+  { icon: IconPlus, label: 'Add Animal', path: routes.createAnimal },
+  { icon: IconPig, label: 'View Animals', path: routes.animalList },
 ];
 
 export function Navbar() {

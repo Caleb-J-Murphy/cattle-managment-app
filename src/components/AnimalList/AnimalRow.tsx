@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Button, MantineStyleProp, Table } from '@mantine/core';
+import { routes } from '@/routing/constants';
 import { Animal } from '@/web/types';
 import { useDeleteAnimal } from '@/web/useApi';
 import { EditAnimalModal } from './EditAnimalModal';
@@ -20,9 +22,14 @@ interface AnimalRowProps {
 }
 
 export const AnimalRow = ({ animal, onRefetch }: AnimalRowProps) => {
+  const navigate = useNavigate();
   const deleteAnimal = useDeleteAnimal();
   const [modalOpen, setModalOpen] = useState(false);
   const [editValues, setEditValues] = useState<Animal>(animal);
+
+  const handleViewButton = () => {
+    navigate(`/${routes.viewAnimal}/${animal.id}`);
+  };
 
   const handleEditButton = () => {
     setModalOpen(true);
@@ -46,6 +53,9 @@ export const AnimalRow = ({ animal, onRefetch }: AnimalRowProps) => {
             editValues={editValues}
             setEditValues={setEditValues}
           />
+          <Button color="green" onClick={() => handleViewButton()}>
+            View
+          </Button>
           <Button color="blue" onClick={() => handleEditButton()}>
             Edit
           </Button>
