@@ -1,7 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { MainLayout } from './layout/MainLayout';
+import { AnimalListPage } from './pages/AnimalList.page';
+import { CreateAnimalPage } from './pages/CreateAnimal.page';
 import { DashboardPage } from './pages/Dashboard.page';
 import { HomePage } from './pages/Home.page';
-import { MainLayout } from './layout/MainLayout';
 
 const router = createBrowserRouter([
   {
@@ -10,11 +12,11 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <HomePage /> },
       { path: 'dashboard', element: <DashboardPage /> },
-      // add more pages here
+      { path: 'createAnimal', element: <CreateAnimalPage /> },
+      { path: 'animalList', element: <AnimalListPage /> },
     ],
   },
 ]);
-
 
 export function Router() {
   return <RouterProvider router={router} />;

@@ -1,15 +1,13 @@
-import { Center, Stack, Tooltip, UnstyledButton } from '@mantine/core';
+import { IconFingerprint, IconGauge, IconHome2, IconPig, IconPlus } from '@tabler/icons-react';
 import { Link, useLocation } from 'react-router-dom';
+import { Center, Stack, Tooltip, UnstyledButton } from '@mantine/core';
 import classes from './Navbar.module.css';
-import {
-  IconHome2,
-  IconGauge,
-  IconFingerprint,
-} from '@tabler/icons-react';
 
 const navItems = [
   { icon: IconHome2, label: 'Home', path: '/' },
   { icon: IconGauge, label: 'Dashboard', path: '/dashboard' },
+  { icon: IconPlus, label: 'Add Animal', path: '/createAnimal' },
+  { icon: IconPig, label: 'Add Animal', path: '/animalList' },
 ];
 
 export function Navbar() {

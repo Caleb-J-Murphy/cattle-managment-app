@@ -22,6 +22,7 @@ const config = {
     '^./(?!.*.css$).*$',
     '\\.css$',
   ],
+
   overrides: [
     {
       files: '*.mdx',
