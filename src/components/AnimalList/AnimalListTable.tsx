@@ -29,9 +29,9 @@ export const AnimalListTable = () => {
     <Table>
       <Table.Thead>
         <Table.Tr>
-            <Table.Th>Tag</Table.Th>
-            <Table.Th>Date of Birth</Table.Th>
-            <Table.Th>Breed</Table.Th>
+          <Table.Th>Tag</Table.Th>
+          <Table.Th>Date of Birth</Table.Th>
+          <Table.Th>Breed</Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{animalRows}</Table.Tbody>

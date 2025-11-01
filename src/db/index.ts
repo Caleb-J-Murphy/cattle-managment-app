@@ -1,14 +1,14 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-import Database from 'better-sqlite3';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
+import path from "path";
+import { fileURLToPath } from "url";
+import Database from "better-sqlite3";
+import { drizzle } from "drizzle-orm/better-sqlite3";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Create the db if it does not already exist, the name is custom and can be
 // whatever we want
-const dbFile = path.resolve(__dirname, '../../livestock.db');
+const dbFile = path.resolve(__dirname, "../../livestock.db");
 
 const connection = new Database(dbFile);
 // Create tables if they don't already exist

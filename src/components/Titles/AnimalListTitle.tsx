@@ -1,5 +1,5 @@
-import { Title } from '@mantine/core';
-import classes from './Title.module.css';
+import { Title } from "@mantine/core";
+import classes from "./Title.module.css";
 
 export function AnimalListTitle() {
   return (

@@ -1,5 +1,5 @@
-import { Text } from '@mantine/core';
-import classes from './Welcome.module.css';
+import { Text } from "@mantine/core";
+import classes from "./Welcome.module.css";
 
 export function WelcomeText() {
   return (

@@ -1,13 +1,17 @@
-import { eq } from 'drizzle-orm';
-import { db } from './index';
-import { animals, events, workflows } from './tables';
+import { eq } from "drizzle-orm";
+import { db } from "./index";
+import { animals, events, workflows } from "./tables";
 
 // Animals
 export const getAnimals = async () => {
   return await db.select().from(animals).all();
 };
 
-export const addAnimal = async (tag: string, breed?: string, birth?: string) => {
+export const addAnimal = async (
+  tag: string,
+  breed?: string,
+  birth?: string
+) => {
   return await db.insert(animals).values({
     tag_number: tag,
     breed,
@@ -16,7 +20,12 @@ export const addAnimal = async (tag: string, breed?: string, birth?: string) => 
 };
 
 // Events
-export const addEvent = async (animalId: number, type: string, date: string, data: object) => {
+export const addEvent = async (
+  animalId: number,
+  type: string,
+  date: string,
+  data: object
+) => {
   return await db.insert(events).values({
     animal_id: animalId,
     event_type: type,
@@ -35,7 +44,9 @@ export const getEventsForAnimal = async (animalId: number) => {
 
 // Workflows
 export const addWorkflow = async (name: string, config: object) => {
-  return await db.insert(workflows).values({ name, config: JSON.stringify(config) });
+  return await db
+    .insert(workflows)
+    .values({ name, config: JSON.stringify(config) });
 };
 
 export const getWorkflows = async () => {

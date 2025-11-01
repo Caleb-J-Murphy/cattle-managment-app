@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import React from 'react';
-import { Button } from '@mantine/core';
-import { useAddAnimal, useAnimals } from '@/web/useApi';
+import React from "react";
+import { Button } from "@mantine/core";
+import { useAddAnimal, useAnimals } from "@/web/useApi";
 
 export function DashboardPage() {
   // Mutation hook
@@ -13,20 +13,20 @@ export function DashboardPage() {
   const handleAddDummyAnimal = async () => {
     try {
       await addAnimalMutation.mutateAsync({
-        tag_number: 'DUMMY123',
-        breed: 'Wagyu',
-        birth_date: '2025-01-01',
+        tag_number: "DUMMY123",
+        breed: "Wagyu",
+        birth_date: "2025-01-01",
       });
 
       // Refetch animals to verify it was added
       refetch();
     } catch (error) {
-      console.error('Failed to add animal', error);
+      console.error("Failed to add animal", error);
     }
   };
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: "flex" }}>
       <div style={{ flex: 1, padding: 16 }}>
         <h1>Welcome to the Dashboard</h1>
         <p>This is the main content area next to the navbar.</p>

@@ -1,13 +1,19 @@
-import { IconFingerprint, IconGauge, IconHome2, IconPig, IconPlus } from '@tabler/icons-react';
-import { Link, useLocation } from 'react-router-dom';
-import { Center, Stack, Tooltip, UnstyledButton } from '@mantine/core';
-import classes from './Navbar.module.css';
+import {
+  IconFingerprint,
+  IconGauge,
+  IconHome2,
+  IconPig,
+  IconPlus,
+} from "@tabler/icons-react";
+import { Link, useLocation } from "react-router-dom";
+import { Center, Stack, Tooltip, UnstyledButton } from "@mantine/core";
+import classes from "./Navbar.module.css";
 
 const navItems = [
-  { icon: IconHome2, label: 'Home', path: '/' },
-  { icon: IconGauge, label: 'Dashboard', path: '/dashboard' },
-  { icon: IconPlus, label: 'Add Animal', path: '/createAnimal' },
-  { icon: IconPig, label: 'Add Animal', path: '/animalList' },
+  { icon: IconHome2, label: "Home", path: "/" },
+  { icon: IconGauge, label: "Dashboard", path: "/dashboard" },
+  { icon: IconPlus, label: "Add Animal", path: "/createAnimal" },
+  { icon: IconPig, label: "Add Animal", path: "/animalList" },
 ];
 
 export function Navbar() {
@@ -24,7 +30,12 @@ export function Navbar() {
           {navItems.map(({ icon: Icon, label, path }) => {
             const active = location.pathname === path;
             return (
-              <Tooltip key={label} label={label} position="right" transitionProps={{ duration: 0 }}>
+              <Tooltip
+                key={label}
+                label={label}
+                position="right"
+                transitionProps={{ duration: 0 }}
+              >
                 <UnstyledButton
                   component={Link}
                   to={path}
