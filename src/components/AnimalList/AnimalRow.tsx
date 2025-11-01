@@ -28,7 +28,7 @@ export const AnimalRow = ({ animal, onRefetch }: AnimalRowProps) => {
   const [editValues, setEditValues] = useState<Animal>(animal);
 
   const handleViewButton = () => {
-    navigate(`/${routes.viewAnimal}/${animal.id}`);
+    navigate(`${routes.viewAnimal}/${animal.id}`);
   };
 
   const handleEditButton = () => {

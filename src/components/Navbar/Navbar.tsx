@@ -23,14 +23,15 @@ export function Navbar() {
       <div className={classes.navbarMain}>
         <Stack justify="center" gap={0}>
           {navItems.map(({ icon: Icon, label, path }) => {
-            const active = location.pathname === path;
+            const active = location.pathname === `${path}` ? true : undefined;
+
             return (
               <Tooltip key={label} label={label} position="right" transitionProps={{ duration: 0 }}>
                 <UnstyledButton
                   component={Link}
-                  to={path}
+                  data-active={active}
                   className={classes.link}
-                  data-active={active || undefined}
+                  to={path}
                 >
                   <Icon size={20} stroke={1.5} />
                 </UnstyledButton>
