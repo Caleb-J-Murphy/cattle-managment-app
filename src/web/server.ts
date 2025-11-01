@@ -63,6 +63,33 @@ app.post('/api/animals', async (req, res) => {
   res.status(201).json(newAnimal);
 });
 
+// PUT update an animal by ID
+app.put('/api/animals/:id', async (req, res) => {
+  const { id } = req.params;
+  const { tag_number, breed, birth_date } = req.body;
+
+  if (!id) {
+    return res.status(400).json({ error: 'Animal ID is required' });
+  }
+
+  try {
+    const result = await db
+      .update(animalsTable)
+      .set({ tag_number, breed, birth_date })
+      .where(eq(animalsTable.id, Number(id)))
+      .returning();
+
+    if (result.length === 0) {
+      return res.status(404).json({ error: 'Animal not found' });
+    }
+
+    res.status(200).json(result[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update animal' });
+  }
+});
+
 // DELETE an animal by ID
 app.delete('/api/animals/:id', async (req, res) => {
   const { id } = req.params;

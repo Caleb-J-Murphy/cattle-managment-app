@@ -47,6 +47,34 @@ export const useAddAnimal = (): UseMutationResult<Animal, Error, NewAnimal> => {
   });
 };
 
+export const useUpdateAnimal = (): UseMutationResult<Animal, Error, Animal> => {
+  const queryClient = useQueryClient();
+
+  return useMutation<Animal, Error, Animal>({
+    mutationFn: async (animal: Animal) => {
+      const res = await fetch(`${API_BASE}/animals/${animal.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tag_number: animal.tag_number,
+          breed: animal.breed,
+          birth_date: animal.birth_date,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to update animal');
+      }
+
+      return res.json() as Promise<Animal>;
+    },
+    onSuccess: () => {
+      // Refetch animal list after updating one
+      queryClient.invalidateQueries({ queryKey: ['animals'] });
+    },
+  });
+};
+
 export const useDeleteAnimal = (): UseMutationResult<void, Error, number> => {
   const queryClient = useQueryClient();
 
