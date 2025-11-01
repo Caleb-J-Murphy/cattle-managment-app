@@ -1,29 +1,30 @@
 /* eslint-disable no-console */
-import "../db/index.js";
+import '../db/index.js';
 
-import Database from "better-sqlite3";
-import bodyParser from "body-parser";
-import cors from "cors";
-import { drizzle } from "drizzle-orm/better-sqlite3";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import express from "express";
-import { AnimalVerification } from "./constants.js";
+import Database from 'better-sqlite3';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import { eq } from 'drizzle-orm';
+import { drizzle } from 'drizzle-orm/better-sqlite3';
+import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import express from 'express';
+import { AnimalVerification } from './constants.js';
 
 // --------------------
 // Setup SQLite + Drizzle
 // --------------------
-const sqlite = new Database("./livestock.db");
+const sqlite = new Database('./livestock.db');
 export const db = drizzle(sqlite);
 
 // --------------------
 // Define tables
 // --------------------
 
-export const animalsTable = sqliteTable("animals", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  tag_number: text("tag_number").notNull(),
-  breed: text("breed"),
-  birth_date: text("birth_date"),
+export const animalsTable = sqliteTable('animals', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  tag_number: text('tag_number').notNull(),
+  breed: text('breed'),
+  birth_date: text('birth_date'),
 });
 
 // --------------------
@@ -37,19 +38,18 @@ app.use(bodyParser.json());
 // Routes
 // --------------------
 
-app.get("/", (_req, res) => {
-  res.send("Cattle Management API is running");
+app.get('/', (_req, res) => {
+  res.send('Cattle Management API is running');
 });
 
 // GET all animals
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.get("/api/animals", async (req, res) => {
+app.get('/api/animals', async (_req, res) => {
   const animals = await db.select().from(animalsTable).all();
   res.json(animals);
 });
 
 // POST a new animal
-app.post("/api/animals", async (req, res) => {
+app.post('/api/animals', async (req, res) => {
   const { tag_number, breed, birth_date } = req.body;
   if (!tag_number) {
     return res.status(400).json(AnimalVerification.tagNotDefined);
@@ -61,6 +61,30 @@ app.post("/api/animals", async (req, res) => {
     .returning();
 
   res.status(201).json(newAnimal);
+});
+
+// DELETE an animal by ID
+app.delete('/api/animals/:id', async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'Animal ID is required' });
+  }
+
+  try {
+    const result = await db.delete(animalsTable).where(eq(animalsTable.id, Number(id)));
+
+    // Drizzle's `.delete()` returns an object with number of rows deleted (depends on dialect)
+    // So you can check it like this:
+    if (result.changes === 0) {
+      return res.status(404).json({ error: 'Animal not found' });
+    }
+
+    res.status(200).json({ message: 'Animal deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to delete animal' });
+  }
 });
 
 // --------------------

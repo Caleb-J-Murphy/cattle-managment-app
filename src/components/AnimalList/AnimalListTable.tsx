@@ -1,25 +1,33 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { Table } from '@mantine/core';
-import { useAnimals } from '@/web/useApi';
+import { Button, Table } from '@mantine/core';
+import { useAnimals, useDeleteAnimal } from '@/web/useApi';
 
 export const AnimalListTable = () => {
   const animalsQuery = useAnimals();
+  const deleteAnimal = useDeleteAnimal();
 
   const [animalRows, setAnimalRows] = useState<ReactNode[]>([]);
   useEffect(() => {
+    if (!animalsQuery.data) return;
+
     setAnimalRows(
-      (
-        animalsQuery.data?.map((animalEntry) => ({
-          id: animalEntry.id,
-          tag: animalEntry.tag_number,
-          DoB: animalEntry.birth_date,
-          breed: animalEntry.breed,
-        })) ?? []
-      ).map((element) => (
-        <Table.Tr key={element.id}>
-          <Table.Td>{element.tag}</Table.Td>
-          <Table.Td>{element.DoB}</Table.Td>
-          <Table.Td>{element.breed}</Table.Td>
+      animalsQuery.data.map((animal) => (
+        <Table.Tr key={animal.id}>
+          <Table.Td>{animal.tag_number}</Table.Td>
+          <Table.Td>{animal.birth_date}</Table.Td>
+          <Table.Td>{animal.breed}</Table.Td>
+          <Table.Td>
+            <Button
+              color="red"
+              onClick={() => {
+                deleteAnimal.mutate(animal.id, {
+                  onSuccess: () => animalsQuery.refetch(),
+                });
+              }}
+            >
+              Delete
+            </Button>
+          </Table.Td>
         </Table.Tr>
       ))
     );
