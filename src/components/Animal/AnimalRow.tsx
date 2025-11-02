@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, MantineStyleProp, Table } from '@mantine/core';
-import { routes } from '@/routing/constants';
-import { Animal } from '@/web/types';
-import { useDeleteAnimal } from '@/web/useApi';
+import { routes } from '../../routing/constants';
+import { Animal } from '../../web/types';
+import { useDeleteAnimal } from '../../web/useApi';
 import { EditAnimalModal } from './EditAnimalModal';
 
 const actionColumnStyles: MantineStyleProp = {
@@ -14,7 +14,7 @@ const actionColumnStyles: MantineStyleProp = {
 interface AnimalRowProps {
   animal: {
     id: number;
-    tag_number: string;
+    tag: string;
     breed?: string;
     birth_date?: string;
   };
@@ -42,7 +42,7 @@ export const AnimalRow = ({ animal, onRefetch }: AnimalRowProps) => {
 
   return (
     <Table.Tr key={animal.id}>
-      <Table.Td>{animal.tag_number}</Table.Td>
+      <Table.Td>{animal.tag}</Table.Td>
       <Table.Td>{animal.birth_date}</Table.Td>
       <Table.Td>{animal.breed}</Table.Td>
       <Table.Td>

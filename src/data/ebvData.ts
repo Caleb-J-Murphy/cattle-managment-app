@@ -1,4 +1,4 @@
-import { EBV } from '@/web/types';
+import { EBV } from '../web/types';
 
 // Top 1% EBV values
 export const top1PercentEBV: EBV = {

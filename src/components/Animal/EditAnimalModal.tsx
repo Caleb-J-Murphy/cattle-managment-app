@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Modal, TextInput } from '@mantine/core';
-import { Animal } from '@/web/types';
-import { useUpdateAnimal } from '@/web/useApi';
+import { Animal } from '../../web/types';
+import { useUpdateAnimal } from '../../web/useApi';
 
 type EditAnimalModalProps = {
   modalOpen: boolean;
@@ -32,8 +32,8 @@ export const EditAnimalModal = ({
     <Modal opened={modalOpen} onClose={() => setModalOpen(false)} title="Edit Animal" centered>
       <TextInput
         label="Tag Number"
-        value={editValues.tag_number}
-        onChange={(e) => handleEdit({ ...editValues, tag_number: e.target.value })}
+        value={editValues.tag}
+        onChange={(e) => handleEdit({ ...editValues, tag: e.target.value })}
       />
       <TextInput
         label="Breed"

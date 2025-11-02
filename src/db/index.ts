@@ -13,22 +13,29 @@ const dbFile = path.resolve(__dirname, '../../livestock.db');
 const connection = new Database(dbFile);
 // Create tables if they don't already exist
 connection.exec(`
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE IF NOT EXISTS animals (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  tag_number TEXT NOT NULL,
+  tag TEXT NOT NULL UNIQUE,
   breed TEXT,
   birth_date TEXT,
   sex TEXT,
   sire_id INTEGER,
-  dam_id INTEGER
+  dam_id INTEGER,
+  FOREIGN KEY (sire_id) REFERENCES animals(id),
+  FOREIGN KEY (dam_id) REFERENCES animals(id)
 );
 
 CREATE TABLE IF NOT EXISTS weights (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   animal_id INTEGER NOT NULL,
   weight_date TEXT NOT NULL,
-  weight_value_kg number NOT NULL,
+  weight_value_kg REAL NOT NULL,
+  FOREIGN KEY (animal_id) REFERENCES animals(id) ON DELETE CASCADE
 );
+
+CREATE INDEX IF NOT EXISTS idx_weights_animal_id ON weights(animal_id);
 `);
 
 // Now create the Drizzle ORM instance

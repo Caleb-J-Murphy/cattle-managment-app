@@ -56,7 +56,7 @@ export const useUpdateAnimal = (): UseMutationResult<Animal, Error, Animal> => {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          tag_number: animal.tag_number,
+          tag: animal.tag,
           breed: animal.breed,
           birth_date: animal.birth_date,
         }),

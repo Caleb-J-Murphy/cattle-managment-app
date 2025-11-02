@@ -1,5 +1,5 @@
 import { Table } from '@mantine/core';
-import { useAnimals } from '@/web/useApi';
+import { useAnimals } from '../../web/useApi';
 import { AnimalRow } from './AnimalRow';
 
 export const AnimalListTable = () => {

@@ -4,9 +4,9 @@ import { Box, Tabs, Text, Title } from '@mantine/core';
 import {
   convertEBVToRadarReadable,
   EbvWeightRadarChart,
-} from '@/components/EBV/EbvWeightRadarChart';
-import { EbvWeightTable } from '@/components/EBV/EbvWeightTable';
-import { EBV } from '@/web/types';
+} from '../components/EBV/EbvWeightRadarChart';
+import { EbvWeightTable } from '../components/EBV/EbvWeightTable';
+import { EBV } from '../web/types';
 
 export const ViewAnimalPage = () => {
   const { id } = useParams<{ id: string }>();

@@ -1,10 +1,7 @@
-/* eslint-disable no-console */
-import { CreateAnimalControls } from "@/components/CreateAnimal/CreateAnimalControls";
-import { CreateAnimalTitle } from "@/components/Titles/CreateAnimalTitle";
+import { CreateAnimalControls } from '../components/Animal';
+import { CreateAnimalTitle } from '../components/Titles';
 
 export function CreateAnimalPage() {
-  // Local state for form inputs
-
   return (
     <>
       <CreateAnimalTitle />

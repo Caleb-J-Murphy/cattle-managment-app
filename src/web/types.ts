@@ -1,11 +1,18 @@
 export type Animal = {
   id: number;
-  tag_number: string;
+  tag: string;
   breed?: string;
   birth_date?: string;
   sex?: string;
   sire_id?: number;
   dam_id?: number;
+};
+
+export type Weight = {
+  id: number;
+  animal_id: number;
+  weight_kg: number;
+  weight_date: number;
 };
 
 // Extended to include other animal ebv types
@@ -29,7 +36,7 @@ export type Wagyu_EBV = {
 };
 
 export type NewAnimal = {
-  tag_number: string;
+  tag: string;
   breed?: string;
   birth_date?: string;
 };

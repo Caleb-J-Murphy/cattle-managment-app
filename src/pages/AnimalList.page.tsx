@@ -1,5 +1,5 @@
-import { AnimalListTable } from "@/components/AnimalList/AnimalListTable";
-import { AnimalListTitle } from "@/components/Titles/AnimalListTitle";
+import { AnimalListTable } from '../components/Animal';
+import { AnimalListTitle } from '../components/Titles';
 
 export const AnimalListPage = () => {
   return (

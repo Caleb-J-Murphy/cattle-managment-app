@@ -1,7 +1,7 @@
 import { IconFingerprint, IconGauge, IconHome2, IconPig, IconPlus } from '@tabler/icons-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Center, Stack, Tooltip, UnstyledButton } from '@mantine/core';
-import { routes } from '@/routing/constants';
+import { routes } from '../../routing/constants';
 import classes from './Navbar.module.css';
 
 const navItems = [

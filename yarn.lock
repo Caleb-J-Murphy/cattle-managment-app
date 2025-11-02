@@ -5340,6 +5340,7 @@ __metadata:
     stylelint: "npm:^16.25.0"
     stylelint-config-standard-scss: "npm:^16.0.0"
     ts-node: "npm:^10.9.2"
+    tsconfig-paths: "npm:^4.2.0"
     typescript: "npm:^5.9.3"
     typescript-eslint: "npm:^8.46.0"
     vite: "npm:^7.1.9"

@@ -1,5 +1,4 @@
-import { WelcomeText } from "@/components/Welcome/WelcomText";
-import { Welcome } from "../components/Welcome/Welcome";
+import { Welcome, WelcomeText } from '../components/Welcome';
 
 export function HomePage() {
   return (
