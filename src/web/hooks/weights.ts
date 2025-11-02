@@ -6,8 +6,8 @@ import {
   UseQueryResult,
 } from '@tanstack/react-query';
 import { WEIGHT_ROUTE } from '../../routes/weights';
+import { API_BASE } from '../api/useApi';
 import { Weight } from '../types';
-import { API_BASE } from '../useApi';
 
 export const useWeightsForAnimal = (animalId: string): UseQueryResult<Weight[], Error> => {
   return useQuery<Weight[], Error>({

@@ -6,6 +6,10 @@ export const getAnimals = async () => {
   return db.select().from(animals).all();
 };
 
+export const getAnimal = async (animalId: number) => {
+  return db.select().from(animals).where(eq(animals.id, animalId)).all();
+};
+
 export const addAnimal = async (tag: string, breed?: string, birth_date?: string) => {
   return db
     .insert(animals)
@@ -18,15 +22,19 @@ export const addAnimal = async (tag: string, breed?: string, birth_date?: string
 };
 
 export const updateAnimal = async (
-  id: number,
+  animalId: number,
   tag: string,
   breed?: string,
-  birth_date?: string
+  birthDate?: string
 ) => {
   return db
     .update(animals)
-    .set({ tag, breed, birth_date })
-    .where(eq(animals.id, Number(id)))
+    .set({
+      tag,
+      breed,
+      birth_date: birthDate,
+    })
+    .where(eq(animals.id, animalId))
     .returning();
 };
 

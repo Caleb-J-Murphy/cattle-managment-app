@@ -12,7 +12,7 @@ export const UpdateAnimalVerification = {
     error: 'Animal ID is required',
   },
   animalIdNotNumber: {
-    error: `animalId needs to be a number`,
+    error: `Animal ID needs to be a number`,
   },
   animalIdNotFound: (animalId: number) => ({
     error: `Animal ${animalId} not found`,
@@ -27,7 +27,7 @@ export const DeleteAnimalVerification = {
     error: 'Animal ID is required',
   },
   animalIdNotNumber: {
-    error: `animalId needs to be a number`,
+    error: `Animal ID needs to be a number`,
   },
   animalNotFound: (animalId: number) => ({
     error: `Animal '${animalId}' not found`,
