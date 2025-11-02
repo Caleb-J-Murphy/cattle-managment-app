@@ -1,6 +1,6 @@
-import { db } from '..';
 import { eq } from 'drizzle-orm';
-import { weights } from '../tables';
+import { db } from '../index.js';
+import { weights } from '../tables.js';
 
 // TODO create a way to get all weights
 

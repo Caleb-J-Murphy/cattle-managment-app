@@ -5,9 +5,10 @@ import {
   useQueryClient,
   UseQueryResult,
 } from '@tanstack/react-query';
-import { ANIMAL_ROUTE } from '../../routes/animals';
 import { API_BASE } from '../api/useApi';
 import { Animal, NewAnimal } from '../types';
+
+const ANIMAL_ROUTE = '/animals';
 
 export const useAnimals = (): UseQueryResult<Animal[], Error> => {
   return useQuery<Animal[], Error>({

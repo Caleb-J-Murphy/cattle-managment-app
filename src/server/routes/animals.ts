@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { addAnimal, deleteAnimal, getAnimals, updateAnimal } from '../db/queries/animalQueries';
 import {
   CreateAnimalVerification as CreateVerif,
   DeleteAnimalVerification as DeleteVerif,
   UpdateAnimalVerification as UpdateVerif,
-} from '../web/constants/AnimalVerification';
+} from '../constants/AnimalVerification.js';
+import { addAnimal, deleteAnimal, getAnimals, updateAnimal } from '../db/queries/animalQueries.js';
 
 export const ANIMAL_ROUTE = '/animals';
 export const animalsRouter = Router();

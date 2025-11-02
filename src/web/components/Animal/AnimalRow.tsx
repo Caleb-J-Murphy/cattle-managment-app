@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, MantineStyleProp, Table } from '@mantine/core';
 import { routes } from '../../routing/constants';
-import { Animal } from '../../web/types';
-import { useDeleteAnimal } from '../../web/useApi';
+import { Animal } from '../../types';
+import { useDeleteAnimal } from '../../useApi';
 import { EditAnimalModal } from './EditAnimalModal';
 
 const actionColumnStyles: MantineStyleProp = {

@@ -1,6 +1,6 @@
 import { Paper, ScrollArea, Table, Text, Title } from '@mantine/core';
 import { top1PercentEBV, top10PercentEBV, top50PercentEBV } from '../../data/ebvData';
-import { EBV } from '../../web/types';
+import { EBV } from '../../types';
 
 type EbvTableProps = {
   data: EBV[]; // array of EBVs

@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode } from 'react';
 import { render as testingLibraryRender } from '@testing-library/react';
 import { MantineProvider } from '@mantine/core';
-import { theme } from '../src/theme';
+import { theme } from '../theme';
 
 export function render(ui: ReactElement) {
   return testingLibraryRender(ui, {

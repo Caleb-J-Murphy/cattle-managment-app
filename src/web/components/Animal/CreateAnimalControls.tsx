@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Button, Stack, Text, TextInput } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
-import { useAddAnimal } from '../../web/useApi';
+import { useAddAnimal } from '../../useApi';
 import classes from './CreateAnimalControls.module.css';
 
 export const CreateAnimalControls = () => {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Modal, TextInput } from '@mantine/core';
-import { Animal } from '../../web/types';
-import { useUpdateAnimal } from '../../web/useApi';
+import { Animal } from '../../types';
+import { useUpdateAnimal } from '../../useApi';
 
 type EditAnimalModalProps = {
   modalOpen: boolean;

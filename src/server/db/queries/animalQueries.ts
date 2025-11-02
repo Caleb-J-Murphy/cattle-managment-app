@@ -1,6 +1,6 @@
-import { db } from '..';
 import { eq } from 'drizzle-orm';
-import { animals } from '../tables';
+import { db } from '../index.js';
+import { animals } from '../tables.js';
 
 export const getAnimals = async () => {
   return db.select().from(animals).all();

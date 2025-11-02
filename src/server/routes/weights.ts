@@ -1,17 +1,17 @@
 import express from 'express';
 import {
+  CreateWeightVerification,
+  DeleteWeightVerification,
+  GetWeightVerification,
+  UpdateWeightVerification,
+} from '../constants/WeightVerification.js';
+import {
   addWeight,
   deleteWeight,
   getWeight,
   getWeightsForAnimal,
   updateWeight,
-} from '../db/queries/weightQueries';
-import {
-  CreateWeightVerification,
-  DeleteWeightVerification,
-  GetWeightVerification,
-  UpdateWeightVerification,
-} from '../web/constants/WeightVerification';
+} from '../db/queries/weightQueries.js';
 
 export const weightsRouter = express.Router();
 

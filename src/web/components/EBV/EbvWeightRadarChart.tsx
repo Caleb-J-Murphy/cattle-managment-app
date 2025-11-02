@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { RadarChart } from '@mantine/charts';
 import { Box, Button, MantineStyleProp, Paper, Popover, Stack, Switch, Title } from '@mantine/core';
 import { top1PercentEBV, top10PercentEBV, top50PercentEBV } from '../../data/ebvData';
-import { EBV } from '../../web/types';
+import { EBV } from '../../types';
 
 export type RadarReadable = {
   trait: string;

@@ -6,7 +6,7 @@ import {
   EbvWeightRadarChart,
 } from '../components/EBV/EbvWeightRadarChart';
 import { EbvWeightTable } from '../components/EBV/EbvWeightTable';
-import { EBV } from '../web/types';
+import { EBV } from '../types';
 
 export const ViewAnimalPage = () => {
   const { id } = useParams<{ id: string }>();

@@ -1,7 +1,6 @@
-/* eslint-disable no-console */
 import React from 'react';
 import { Button } from '@mantine/core';
-import { useAddAnimal, useAnimals } from '../web/useApi';
+import { useAddAnimal, useAnimals } from '../useApi';
 
 export function DashboardPage() {
   // Mutation hook
@@ -21,6 +20,7 @@ export function DashboardPage() {
       // Refetch animals to verify it was added
       refetch();
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Failed to add animal', error);
     }
   };
