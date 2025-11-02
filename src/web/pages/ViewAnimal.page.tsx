@@ -8,7 +8,7 @@ import {
 import { EbvWeightTable } from '../components/EBV/EbvWeightTable';
 import { EBV } from '../types';
 
-export const ViewAnimalPage = () => {
+export default function ViewAnimalPage() {
   const { id } = useParams<{ id: string }>();
 
   const exampleEBV: EBV = {
@@ -62,4 +62,4 @@ export const ViewAnimalPage = () => {
       </Tabs.Panel>
     </Tabs>
   );
-};
+}

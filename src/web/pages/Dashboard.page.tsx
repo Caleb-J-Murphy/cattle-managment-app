@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@mantine/core';
 import { useAddAnimal, useAnimals } from '../useApi';
 
-export function DashboardPage() {
+export default function DashboardPage() {
   // Mutation hook
   const addAnimalMutation = useAddAnimal();
 

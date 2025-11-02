@@ -1,11 +1,14 @@
+import React, { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { MainLayout } from '../layout/MainLayout';
-import { AnimalListPage } from '../pages/AnimalList.page';
-import { CreateAnimalPage } from '../pages/CreateAnimal.page';
-import { DashboardPage } from '../pages/Dashboard.page';
-import { HomePage } from '../pages/Home.page';
-import { ViewAnimalPage } from '../pages/ViewAnimal.page';
 import { routes } from './constants';
+
+// Lazy load pages
+const HomePage = React.lazy(() => import('../pages/Home.page'));
+const DashboardPage = React.lazy(() => import('../pages/Dashboard.page'));
+const CreateAnimalPage = React.lazy(() => import('../pages/CreateAnimal.page'));
+const AnimalListPage = React.lazy(() => import('../pages/AnimalList.page'));
+const ViewAnimalPage = React.lazy(() => import('../pages/ViewAnimal.page'));
 
 const router = createBrowserRouter([
   {
@@ -22,5 +25,9 @@ const router = createBrowserRouter([
 ]);
 
 export function Router() {
-  return <RouterProvider router={router} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RouterProvider router={router} />
+    </Suspense>
+  );
 }

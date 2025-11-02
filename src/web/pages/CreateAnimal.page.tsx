@@ -1,7 +1,7 @@
 import { CreateAnimalControls } from '../components/Animal';
 import { CreateAnimalTitle } from '../components/Titles';
 
-export function CreateAnimalPage() {
+export default function CreateAnimalPage() {
   return (
     <>
       <CreateAnimalTitle />

@@ -1,11 +1,11 @@
 import { AnimalListTable } from '../components/Animal';
 import { AnimalListTitle } from '../components/Titles';
 
-export const AnimalListPage = () => {
+export default function AnimalListPage() {
   return (
     <>
       <AnimalListTitle />
       <AnimalListTable />
     </>
   );
-};
+}
