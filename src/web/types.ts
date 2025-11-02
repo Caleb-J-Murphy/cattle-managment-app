@@ -40,17 +40,3 @@ export type NewAnimal = {
   breed?: string;
   birth_date?: string;
 };
-
-export type Event = {
-  id: number;
-  animal_id: number;
-  event_type: string;
-  event_date: string;
-  data?: Record<string, any>;
-};
-
-export type Workflow = {
-  id: number;
-  name: string;
-  config?: Record<string, any>;
-};

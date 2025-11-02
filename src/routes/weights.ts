@@ -1,14 +1,26 @@
 import express from 'express';
-import { addWeightForAnimal, getWeightsForAnimal } from '../db/queries/weightQueries';
+import {
+  addWeight,
+  deleteWeight,
+  getWeight,
+  getWeightsForAnimal,
+  updateWeight,
+} from '../db/queries/weightQueries';
 import {
   CreateWeightVerification,
+  DeleteWeightVerification,
   GetWeightVerification,
+  UpdateWeightVerification,
 } from '../web/constants/WeightVerification';
 
 export const weightsRouter = express.Router();
 
+export const WEIGHT_ROUTE = '/weight';
+
+// TODO create route to get all weights
+
 // GET all weights for a specific animal
-weightsRouter.get('/weight/:animalId', async (req, res) => {
+weightsRouter.get(`${WEIGHT_ROUTE}/:animalId`, async (req, res) => {
   const { animalId } = req.params;
   const parsedId = Number(animalId);
   if (isNaN(parsedId)) {
@@ -18,17 +30,39 @@ weightsRouter.get('/weight/:animalId', async (req, res) => {
     const weights = await getWeightsForAnimal(parsedId);
 
     if (weights.length === 0) {
-      return res.status(404).json(GetWeightVerification.noWeightsFound);
+      return res.status(404).json(GetWeightVerification.noWeightsFoundForAnimal(parsedId));
     }
 
     res.json(weights);
   } catch (err) {
-    res.status(500).json(GetWeightVerification.failedGetWeights(parsedId));
+    res.status(500).json(GetWeightVerification.failedGetWeightsForAnimal(parsedId));
+  }
+});
+
+// GET a specific weight by weight ID
+weightsRouter.get(`${WEIGHT_ROUTE}/:weightId/detail`, async (req, res) => {
+  const { weightId } = req.params;
+  const parsedId = Number(weightId);
+
+  if (isNaN(parsedId)) {
+    return res.status(400).json(GetWeightVerification.weightIdNotNumber);
+  }
+
+  try {
+    const weight = await getWeight(parsedId);
+
+    if (!weight) {
+      return res.status(404).json(GetWeightVerification.weightNotFound(parsedId));
+    }
+
+    res.json(weight);
+  } catch (err) {
+    res.status(500).json(GetWeightVerification.failedGetWeight(parsedId));
   }
 });
 
 // POST create a new weight for an animal
-weightsRouter.post('/weight/', async (req, res) => {
+weightsRouter.post(`${WEIGHT_ROUTE}`, async (req, res) => {
   const { animalId, weightDate, weightValueKg } = req.body;
   const parsedId = Number(animalId);
   if (isNaN(parsedId)) {
@@ -44,9 +78,62 @@ weightsRouter.post('/weight/', async (req, res) => {
     return res.status(400).json(CreateWeightVerification.weightValueNotDefined);
   }
   try {
-    const [newWeight] = await addWeightForAnimal(parsedId, weightDate, weightValueKg);
+    const [newWeight] = await addWeight(parsedId, weightDate, weightValueKg);
     res.status(201).json(newWeight);
   } catch (err) {
     res.status(500).json(CreateWeightVerification.failedCreateWeight(parsedId));
+  }
+});
+
+// PUT update a weight by ID
+weightsRouter.put(`${WEIGHT_ROUTE}/:weightId`, async (req, res) => {
+  const { weightId } = req.params;
+  const { animalId, weightDate, weightValueKg } = req.body;
+
+  if (!weightId) {
+    return res.status(400).json(UpdateWeightVerification.weightIdNotDefined);
+  }
+
+  const parsedId = Number(weightId);
+  if (!parsedId) {
+    return res.status(400).json(UpdateWeightVerification.weightIdNotDefined);
+  }
+
+  try {
+    const result = await updateWeight(parsedId, animalId, weightDate, weightValueKg);
+
+    if (result.length === 0) {
+      return res.status(404).json(UpdateWeightVerification.weightIdNotFound(parsedId));
+    }
+
+    res.status(200).json(result[0]);
+  } catch (err) {
+    res.status(500).json(UpdateWeightVerification.updateUnsuccessful(parsedId));
+  }
+});
+
+// DELETE a weight by ID
+weightsRouter.delete(`${WEIGHT_ROUTE}/:weightId`, async (req, res) => {
+  const { weightId } = req.params;
+
+  if (!weightId) {
+    return res.status(400).json(DeleteWeightVerification.weightIdNotDefined);
+  }
+
+  const parsedId = Number(weightId);
+  if (!parsedId) {
+    return res.status(400).json(DeleteWeightVerification.weightIdNotNumber);
+  }
+
+  try {
+    const result = await deleteWeight(parsedId);
+
+    if (result.changes === 0) {
+      return res.status(404).json();
+    }
+
+    res.status(200).json(DeleteWeightVerification.deleteSuccessful(parsedId));
+  } catch (err) {
+    res.status(500).json(DeleteWeightVerification.deleteUnsuccessful(parsedId));
   }
 });

@@ -8,7 +8,7 @@ import { drizzle } from 'drizzle-orm/better-sqlite3';
 import express from 'express';
 import { animalsRouter } from '../routes/animals.js';
 import { vaccinationsRouter } from '../routes/vaccinations.js';
-import { weightsRouter } from '../routes/weights.js';
+import { WEIGHT_ROUTE, weightsRouter } from '../routes/weights.js';
 
 // --------------------
 // Setup SQLite + Drizzle
@@ -31,7 +31,7 @@ app.get('/', (_req, res) => {
 });
 
 app.use('/api/animals', animalsRouter);
-app.use('/api/weights', weightsRouter);
+app.use(`/api${WEIGHT_ROUTE}`, weightsRouter);
 app.use('/api/vaccinations', vaccinationsRouter);
 
 // --------------------
