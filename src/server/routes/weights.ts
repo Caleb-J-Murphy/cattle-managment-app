@@ -15,12 +15,10 @@ import {
 
 export const weightsRouter = express.Router();
 
-export const WEIGHT_ROUTE = '/weight';
-
 // TODO create route to get all weights
 
 // GET all weights for a specific animal
-weightsRouter.get(`${WEIGHT_ROUTE}/:animalId`, async (req, res) => {
+weightsRouter.get(`/animal/:animalId`, async (req, res) => {
   const { animalId } = req.params;
   const parsedId = Number(animalId);
   if (isNaN(parsedId)) {
@@ -40,7 +38,7 @@ weightsRouter.get(`${WEIGHT_ROUTE}/:animalId`, async (req, res) => {
 });
 
 // GET a specific weight by weight ID
-weightsRouter.get(`${WEIGHT_ROUTE}/:weightId/detail`, async (req, res) => {
+weightsRouter.get(`/:weightId`, async (req, res) => {
   const { weightId } = req.params;
   const parsedId = Number(weightId);
 
@@ -62,7 +60,7 @@ weightsRouter.get(`${WEIGHT_ROUTE}/:weightId/detail`, async (req, res) => {
 });
 
 // POST create a new weight for an animal
-weightsRouter.post(`${WEIGHT_ROUTE}`, async (req, res) => {
+weightsRouter.post(`/`, async (req, res) => {
   const { animalId, weightDate, weightValueKg } = req.body;
   const parsedId = Number(animalId);
   if (isNaN(parsedId)) {
@@ -86,7 +84,7 @@ weightsRouter.post(`${WEIGHT_ROUTE}`, async (req, res) => {
 });
 
 // PUT update a weight by ID
-weightsRouter.put(`${WEIGHT_ROUTE}/:weightId`, async (req, res) => {
+weightsRouter.put(`/:weightId`, async (req, res) => {
   const { weightId } = req.params;
   const { animalId, weightDate, weightValueKg } = req.body;
 
@@ -113,7 +111,7 @@ weightsRouter.put(`${WEIGHT_ROUTE}/:weightId`, async (req, res) => {
 });
 
 // DELETE a weight by ID
-weightsRouter.delete(`${WEIGHT_ROUTE}/:weightId`, async (req, res) => {
+weightsRouter.delete(`/:weightId`, async (req, res) => {
   const { weightId } = req.params;
 
   if (!weightId) {

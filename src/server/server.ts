@@ -6,9 +6,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 import express from 'express';
-import { ANIMAL_ROUTE, animalsRouter } from './routes/animals.js';
+import { animalsRouter } from './routes/animals.js';
 import { vaccinationsRouter } from './routes/vaccinations.js';
-import { WEIGHT_ROUTE, weightsRouter } from './routes/weights.js';
+import { weightsRouter } from './routes/weights.js';
 
 // --------------------
 // Setup SQLite + Drizzle
@@ -30,8 +30,8 @@ app.get('/', (_req, res) => {
   res.send('Cattle Management API is running');
 });
 
-app.use(`/api${ANIMAL_ROUTE}`, animalsRouter);
-app.use(`/api${WEIGHT_ROUTE}`, weightsRouter);
+app.use(`/api/animals`, animalsRouter);
+app.use(`/api/weights`, weightsRouter);
 app.use('/api/vaccinations', vaccinationsRouter);
 
 // --------------------

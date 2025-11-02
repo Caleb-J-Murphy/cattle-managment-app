@@ -6,17 +6,16 @@ import {
 } from '../constants/AnimalVerification.js';
 import { addAnimal, deleteAnimal, getAnimals, updateAnimal } from '../db/queries/animalQueries.js';
 
-export const ANIMAL_ROUTE = '/animals';
 export const animalsRouter = Router();
 
 // GET all animals
-animalsRouter.get(`${ANIMAL_ROUTE}`, async (_req, res) => {
+animalsRouter.get(`/`, async (_req, res) => {
   const animals = await getAnimals();
   res.json(animals);
 });
 
 // POST a new animal
-animalsRouter.post(`${ANIMAL_ROUTE}`, async (req, res) => {
+animalsRouter.post(`/`, async (req, res) => {
   const { tag, breed, birth_date } = req.body;
   if (!tag) {
     return res.status(400).json(CreateVerif.tagNotDefined);
@@ -31,7 +30,7 @@ animalsRouter.post(`${ANIMAL_ROUTE}`, async (req, res) => {
 });
 
 // PUT update an animal by ID
-animalsRouter.put(`${ANIMAL_ROUTE}/:animalId`, async (req, res) => {
+animalsRouter.put(`/:animalId`, async (req, res) => {
   const { animalId } = req.params;
   const { tag, breed, birth_date } = req.body;
 
@@ -58,7 +57,7 @@ animalsRouter.put(`${ANIMAL_ROUTE}/:animalId`, async (req, res) => {
 });
 
 // DELETE an animal by ID
-animalsRouter.delete(`${ANIMAL_ROUTE}/:animalId`, async (req, res) => {
+animalsRouter.delete(`/:animalId`, async (req, res) => {
   const { animalId } = req.params;
 
   if (!animalId) {
