@@ -34,10 +34,6 @@ animalsRouter.put(`/:animalId`, async (req, res) => {
   const { animalId } = req.params;
   const { tag, breed, birth_date } = req.body;
 
-  if (!animalId) {
-    return res.status(400).json(UpdateVerif.animalIdNotDefined);
-  }
-
   const parsedId = Number(animalId);
   if (!parsedId) {
     return res.status(400).json(UpdateVerif.animalIdNotNumber);
@@ -60,12 +56,8 @@ animalsRouter.put(`/:animalId`, async (req, res) => {
 animalsRouter.delete(`/:animalId`, async (req, res) => {
   const { animalId } = req.params;
 
-  if (!animalId) {
-    return res.status(400).json(DeleteVerif.animalIdNotDefined);
-  }
-
   const parsedId = Number(animalId);
-  if (!parsedId) {
+  if (isNaN(parsedId)) {
     return res.status(400).json(DeleteVerif.animalIdNotNumber);
   }
 
@@ -73,7 +65,7 @@ animalsRouter.delete(`/:animalId`, async (req, res) => {
     const result = await deleteAnimal(parsedId);
 
     if (result.changes === 0) {
-      return res.status(404).json();
+      return res.status(404).json(DeleteVerif.animalNotFound(parsedId));
     }
 
     res.status(200).json(DeleteVerif.deleteSuccessful(parsedId));

@@ -8,9 +8,6 @@ export const CreateAnimalVerification = {
 };
 
 export const UpdateAnimalVerification = {
-  animalIdNotDefined: {
-    error: 'Animal ID is required',
-  },
   animalIdNotNumber: {
     error: `Animal ID needs to be a number`,
   },
@@ -23,9 +20,6 @@ export const UpdateAnimalVerification = {
 };
 
 export const DeleteAnimalVerification = {
-  animalIdNotDefined: {
-    error: 'Animal ID is required',
-  },
   animalIdNotNumber: {
     error: `Animal ID needs to be a number`,
   },
