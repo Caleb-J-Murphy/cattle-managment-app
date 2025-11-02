@@ -12,20 +12,20 @@ export type Animal = {
 export type EBV = Wagyu_EBV;
 
 export type Wagyu_EBV = {
-  gestationLengthDays: number;
-  birthWeight: number;
-  weight200DaysKg: number;
-  weight400DaysKg: number;
-  weight600DaysKg: number;
-  matureCowWeightKg: number;
-  milkKg: number;
-  scrotalSizeKg: number;
-  carcusWeightKg: number;
-  eyeMuscleAreaKg: number;
-  rumpFatMm: number;
-  retailBeefYeildPerc: number;
-  marbleScore: number;
-  marbleFinenessPerc: number;
+  gestationLengthDays?: number;
+  birthWeight?: number;
+  weight200DaysKg?: number;
+  weight400DaysKg?: number;
+  weight600DaysKg?: number;
+  matureCowWeightKg?: number;
+  milkKg?: number;
+  scrotalSizeKg?: number;
+  carcusWeightKg?: number;
+  eyeMuscleAreaKg?: number;
+  rumpFatMm?: number;
+  retailBeefYeildPerc?: number;
+  marbleScore?: number;
+  marbleFinenessPerc?: number;
 };
 
 export type NewAnimal = {

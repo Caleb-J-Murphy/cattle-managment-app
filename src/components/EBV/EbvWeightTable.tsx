@@ -1,12 +1,15 @@
 import { Paper, ScrollArea, Table, Text, Title } from '@mantine/core';
+import { top1PercentEBV, top10PercentEBV, top50PercentEBV } from '@/data/ebvData';
 import { EBV } from '@/web/types';
 
 type EbvTableProps = {
-  data: EBV[]; // array of EBVs (animal + top percentiles)
+  data: EBV[]; // array of EBVs
 };
 
-export const EbvTable = ({ data }: EbvTableProps) => {
+export const EbvWeightTable = ({ data }: EbvTableProps) => {
   const columnLabels = ['Animal', 'Top 1%', 'Top 10%', 'Top 50%'];
+
+  data.push(top1PercentEBV, top10PercentEBV, top50PercentEBV);
 
   const traits: { key: keyof EBV; label: string }[] = [
     { key: 'birthWeight', label: 'Birth' },

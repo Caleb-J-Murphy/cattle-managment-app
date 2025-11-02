@@ -1,26 +1,68 @@
 import { useMemo, useState } from 'react';
 import { RadarChart } from '@mantine/charts';
-import {
-  Box,
-  Button,
-  Divider,
-  MantineStyleProp,
-  Paper,
-  Popover,
-  Stack,
-  Switch,
-  Text,
-  Title,
-} from '@mantine/core';
+import { Box, Button, MantineStyleProp, Paper, Popover, Stack, Switch, Title } from '@mantine/core';
+import { top1PercentEBV, top10PercentEBV, top50PercentEBV } from '@/data/ebvData';
+import { EBV } from '@/web/types';
 
-const displayContainerStyles: MantineStyleProp = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.75rem',
-  minWidth: 148,
-  margin: '0 auto',
-  height: 'min-content',
+export type RadarReadable = {
+  trait: string;
+  'Weight (kg)': number | undefined;
+  'Top 1% weight (kg)': number | undefined;
+  'Top 10% weight (kg)': number | undefined;
+  'Top 50% weight (kg)': number | undefined;
 };
+
+/**
+ * Given animal data and percent data, convert EBV data to be readable by the <Radar /> component. It also returns the top 1% top 10% and top 50% of EBV data taken from the wagyu association
+ * @param animalEbv The animal EBV data you want to show
+ * @returns
+ */
+export function convertEBVToRadarReadable(animalEbv: EBV): RadarReadable[] {
+  return [
+    {
+      trait: 'Birth',
+      'Weight (kg)': animalEbv.birthWeight,
+      'Top 1% weight (kg)': top1PercentEBV.birthWeight,
+      'Top 10% weight (kg)': top10PercentEBV.birthWeight,
+      'Top 50% weight (kg)': top50PercentEBV.birthWeight,
+    },
+    {
+      trait: '200 Day',
+      'Weight (kg)': animalEbv.weight200DaysKg,
+      'Top 1% weight (kg)': top1PercentEBV.weight200DaysKg,
+      'Top 10% weight (kg)': top10PercentEBV.weight200DaysKg,
+      'Top 50% weight (kg)': top50PercentEBV.weight200DaysKg,
+    },
+    {
+      trait: '400 Day',
+      'Weight (kg)': animalEbv.weight400DaysKg,
+      'Top 1% weight (kg)': top1PercentEBV.weight400DaysKg,
+      'Top 10% weight (kg)': top10PercentEBV.weight400DaysKg,
+      'Top 50% weight (kg)': top50PercentEBV.weight400DaysKg,
+    },
+    {
+      trait: '600 Day',
+      'Weight (kg)': animalEbv.weight600DaysKg,
+      'Top 1% weight (kg)': top1PercentEBV.weight600DaysKg,
+      'Top 10% weight (kg)': top10PercentEBV.weight600DaysKg,
+      'Top 50% weight (kg)': top50PercentEBV.weight600DaysKg,
+    },
+    {
+      trait: 'Mature Cow',
+      'Weight (kg)': animalEbv.matureCowWeightKg,
+      'Top 1% weight (kg)': top1PercentEBV.matureCowWeightKg,
+      'Top 10% weight (kg)': top10PercentEBV.matureCowWeightKg,
+      'Top 50% weight (kg)': top50PercentEBV.matureCowWeightKg,
+    },
+    {
+      trait: 'Carcus',
+      'Weight (kg)': animalEbv.carcusWeightKg,
+      'Top 1% weight (kg)': top1PercentEBV.carcusWeightKg,
+      'Top 10% weight (kg)': top10PercentEBV.carcusWeightKg,
+      'Top 50% weight (kg)': top50PercentEBV.carcusWeightKg,
+    },
+  ];
+}
 
 const containerStyles: MantineStyleProp = {
   display: 'flex',
@@ -28,23 +70,21 @@ const containerStyles: MantineStyleProp = {
   alignItems: 'flex-start',
   justifyContent: 'space-between',
   justifyItems: 'center',
-  gap: '0rem',
   width: 'fit-content',
 };
 
 const chartContainerStyles: MantineStyleProp = {
-  flex: 1,
   minWidth: 340,
 };
 
 type EbvRadarChartProps = {
-  data: Record<string, number | string>[];
+  data: RadarReadable[];
   series: { name: string; color: string; opacity?: number }[];
   title?: string;
   height?: number;
 };
 
-export const EbvRadarChart = ({
+export const EbvWeightRadarChart = ({
   data,
   series,
   title = 'EBV Weight Values',
@@ -126,12 +166,16 @@ export const EbvRadarChart = ({
           dataKey="trait"
           withPolarRadiusAxis
           withTooltip
+          withLegend
           series={filteredSeries}
           polarRadiusAxisProps={{
             domain: [minValue, maxValue],
             axisLine: false,
             tick: false,
             tickLine: false,
+          }}
+          legendProps={{
+            wrapperStyle: { paddingTop: 32 },
           }}
         />
       </Box>
