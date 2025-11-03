@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { LineChart } from '@mantine/charts';
 import { useWeightsForAnimal } from '../../useApi';
 
@@ -8,16 +9,20 @@ type AnimalWeightChartProps = {
 export function AnimalWeightChart({ animalId }: AnimalWeightChartProps) {
   const animalWeights = useWeightsForAnimal(animalId);
 
-  const lineData =
-    animalWeights.data?.map((weight) => ({
-      date: new Date(weight.weight_date).toLocaleDateString('en-US', {
-        month: 'short', // "Jan", "Feb", "Mar", etc.
-        day: 'numeric', // "1", "2", "3", ...
-      }),
-      weight: weight.weight_value_kg,
-    })) ?? [];
-
-  console.log('lineData:', lineData);
+  const lineData = useMemo(() => {
+    return (
+      animalWeights.data
+        ?.map((weight) => ({
+          rawDate: new Date(weight.weight_date),
+          date: new Date(weight.weight_date).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+          }),
+          weight: weight.weight_value_kg,
+        }))
+        .sort((a, b) => a.rawDate.getTime() - b.rawDate.getTime()) ?? []
+    );
+  }, [animalWeights.data]);
 
   return (
     <LineChart
