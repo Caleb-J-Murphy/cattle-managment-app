@@ -6,15 +6,15 @@ import {
   UseQueryResult,
 } from '@tanstack/react-query';
 import { API_BASE } from '../api/useApi';
-import { Weight } from '../types';
+import { newWeight, Weight } from '../types';
 
-const WEIGHT_ROUTE = '/weight';
+const WEIGHT_ROUTE = '/weights';
 
-export const useWeightsForAnimal = (animalId: string): UseQueryResult<Weight[], Error> => {
+export const useWeightsForAnimal = (animalId: number): UseQueryResult<Weight[], Error> => {
   return useQuery<Weight[], Error>({
     queryKey: ['weight', animalId],
     queryFn: async () => {
-      const res = await fetch(`${API_BASE}${WEIGHT_ROUTE}/${animalId}`);
+      const res = await fetch(`${API_BASE}${WEIGHT_ROUTE}/animal/${animalId}`);
       if (!res.ok) {
         throw new Error(`Failed to fetch weights for animal ${animalId}`);
       }
@@ -24,11 +24,11 @@ export const useWeightsForAnimal = (animalId: string): UseQueryResult<Weight[], 
   });
 };
 
-export const useAddWeightForAnimal = (): UseMutationResult<Weight, Error, Weight> => {
+export const useAddWeightForAnimal = (): UseMutationResult<Weight, Error, newWeight> => {
   const queryClient = useQueryClient();
 
-  return useMutation<Weight, Error, Weight>({
-    mutationFn: async (newWeight: Weight) => {
+  return useMutation<Weight, Error, newWeight>({
+    mutationFn: async (newWeight: newWeight) => {
       const res = await fetch(`${API_BASE}${WEIGHT_ROUTE}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -56,7 +56,7 @@ export const useUpdateWeight = (): UseMutationResult<Weight, Error, Weight> => {
         body: JSON.stringify({
           animalId: weight.animal_id,
           weightDate: weight.weight_date,
-          weightValueKg: weight.weight_kg,
+          weightValueKg: weight.weight_value_kg,
         }),
       });
 

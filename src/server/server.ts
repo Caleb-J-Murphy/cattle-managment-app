@@ -1,14 +1,14 @@
 /* eslint-disable no-console */
-import './db/index.js';
+import './db/index.ts';
 
 import Database from 'better-sqlite3';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 import express from 'express';
-import { animalsRouter } from './routes/animals.js';
-import { vaccinationsRouter } from './routes/vaccinations.js';
-import { weightsRouter } from './routes/weights.js';
+import { animalsRouter } from './routes/animals.ts';
+import { vaccinationsRouter } from './routes/vaccinations.ts';
+import { weightsRouter } from './routes/weights.ts';
 
 // --------------------
 // Setup SQLite + Drizzle

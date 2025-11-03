@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Tabs, Text, Title } from '@mantine/core';
+import { AnimalAddWeight } from '../components/Animal/AnimalAddWeight';
+import { AnimalWeightChart } from '../components/Animal/AnimalWeightChart';
 import {
   convertEBVToRadarReadable,
   EbvWeightRadarChart,
@@ -55,6 +57,8 @@ export default function ViewAnimalPage() {
           <EbvWeightRadarChart data={radarData} series={baseSeries} />
           <EbvWeightTable data={[exampleEBV]} />
         </Box>
+        <AnimalWeightChart animalId={Number(id)} />
+        <AnimalAddWeight animalId={Number(id)} />
       </Tabs.Panel>
 
       <Tabs.Panel value="vaccination" pt="xs">

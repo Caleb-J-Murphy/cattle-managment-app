@@ -11,8 +11,14 @@ export type Animal = {
 export type Weight = {
   id: number;
   animal_id: number;
-  weight_kg: number;
-  weight_date: number;
+  weight_value_kg: number;
+  weight_date: string;
+};
+
+export type newWeight = {
+  animal_id: number;
+  weight_value_kg: number;
+  weight_date: string;
 };
 
 // Extended to include other animal ebv types
