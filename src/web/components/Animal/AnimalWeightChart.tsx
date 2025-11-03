@@ -15,6 +15,7 @@ export function AnimalWeightChart({ animalId }: AnimalWeightChartProps) {
         ?.map((weight) => ({
           rawDate: new Date(weight.weight_date),
           date: new Date(weight.weight_date).toLocaleDateString('en-US', {
+            year: '2-digit',
             month: 'short',
             day: 'numeric',
           }),
