@@ -3,8 +3,8 @@ import {
   CreateAnimalVerification as CreateVerif,
   DeleteAnimalVerification as DeleteVerif,
   UpdateAnimalVerification as UpdateVerif,
-} from '../constants/AnimalVerification.js';
-import { addAnimal, deleteAnimal, getAnimals, updateAnimal } from '../db/queries/animalQueries.js';
+} from '../constants/AnimalVerification.ts';
+import { addAnimal, deleteAnimal, getAnimals, updateAnimal } from '../db/queries/animalQueries.ts';
 
 export const animalsRouter = Router();
 

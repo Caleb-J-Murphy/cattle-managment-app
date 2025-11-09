@@ -3,13 +3,13 @@ export const CreateWeightVerification = {
     error: `animalId needs to be a number`,
   },
   animalIdNotDefined: {
-    error: 'weight_kg is required',
+    error: 'animal id is required',
   },
   weightValueNotDefined: {
-    error: 'weight_kg is required',
+    error: 'weight is required',
   },
   weightDateNotDefined: {
-    error: 'weight_kg is required',
+    error: 'weigh date is required',
   },
   failedCreateWeight: (animalId: number) => ({
     error: `Failed ro create weight for animal ${animalId}`,
